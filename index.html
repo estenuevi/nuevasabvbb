@@ -150,262 +150,277 @@
         .social-separator:not(:empty)::after { margin-left: 1em; }
 
         .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 12px;
-            border-radius: 14px;
-            border: 1px solid #222226;
-            background: #111113;
-            color: #d1d1d6;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .social-link:hover {
-            background: #18181c;
-            border-color: #3a3a44;
-            color: #fff;
-        }
-        .social-link img {
-            width: 22px;
-            height: 22px;
-            margin-right: 12px;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    border: 1px solid #222226;
+    background: #000;
+    color: #d1d1d6;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    /* Optimización para iOS: evita retrasos al hacer clic */
+    touch-action: manipulation; 
+}
+.social-link:hover {
+    background: #;
+    border-color: #3a3a44;
+    color: #fff;
+}
+.social-link img {
+    width: 22px;
+    height: 22px;
+    margin-right: 12px;
+}
 
-        /* Perfil de Usuario */
-        #profile-display {
-            background: linear-gradient(180deg, #16161a 0%, #111113 100%);
-            padding: 20px;
-            border-radius: 18px;
-            text-align: center;
-            margin-bottom: 20px;
-            border: 1px solid #222226;
-            display: none;
-            animation: fadeIn 0.4s ease-out;
-        }
-        .avatar-wrapper {
-            position: relative;
-            width: 86px;
-            height: 86px;
-            margin: 0 auto 12px auto;
-        }
-        .avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px solid var(--tiktok-red);
-            object-fit: cover;
-        }
-        .avatar-badge {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background: #00e676;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            border: 3px solid #16161a;
-        }
+/* Perfil de Usuario */
+#profile-display {
+    background: linear-gradient(180deg, #16161a 0%, #111113 100%);
+    padding: 20px;
+    border-radius: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 1px solid #222226;
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+}
+.avatar-wrapper {
+    position: relative;
+    width: 86px;
+    height: 86px;
+    margin: 0 auto 12px auto;
+}
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid var(--tiktok-red);
+    object-fit: cover;
+}
+.avatar-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #00e676;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #16161a;
+}
 
-        /* ==========================================
-           3. SISTEMA DE CATÁLOGO 3D AVANZADO
-           ========================================== */
-        .section-label {
-            font-size: 14px;
-            color: #8e8e93;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
+/* ==========================================
+   3. SISTEMA DE CATÁLOGO 3D AVANZADO
+   ========================================== */
+.section-label {
+    font-size: 14px;
+    color: #8e8e93;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
 
-        .gift-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            height: 340px;
-            overflow-y: auto;
-            background: #08080a;
-            padding: 12px;
-            border-radius: 16px;
-            border: 1px solid #1c1c22;
-            perspective: 1200px;
-            margin-bottom: 20px;
-        }
+.gift-grid {
+    display: grid;
+    /* MEJORA IPHONE: Se adapta dinámicamente si el espacio es muy reducido */
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    gap: 8px;
+    height: 320px;
+    overflow-y: auto;
+    background: #08080a;
+    padding: 10px;
+    border-radius: 16px;
+    border: 1px solid #1c1c22;
+    perspective: 1200px;
+    margin-bottom: 20px;
+    /* Suavizado de scroll en iOS */
+    -webkit-overflow-scrolling: touch; 
+}
 
-        /* Scrollbar estilizada */
-        .gift-grid::-webkit-scrollbar {
-            width: 4px;
-        }
-        .gift-grid::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.1);
-        }
-        .gift-grid::-webkit-scrollbar-thumb {
-            background: #2d2d34;
-            border-radius: 10px;
-        }
+/* Scrollbar estilizada */
+.gift-grid::-webkit-scrollbar {
+    width: 4px;
+}
+.gift-grid::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+}
+.gift-grid::-webkit-scrollbar-thumb {
+    background: #2d2d34;
+    border-radius: 10px;
+}
 
-        /* CONTENEDOR MARCO 3D ROJO ANIMADO */
-        .gift-item {
-            position: relative;
-            height: 90px;
-            background: linear-gradient(135deg, #1a080c 0%, #0f0406 100%);
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden; /* Evita que la imagen se salga bajo cualquier condición */
-            transform-style: preserve-3d;
-            border: 2px solid var(--border-red);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(254, 44, 85, 0.2);
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), 
-                        border-color 0.3s, 
-                        box-shadow 0.3s;
-        }
+/* CONTENEDOR MARCO 3D ROJO ANIMADO */
+.gift-item {
+    position: relative;
+    height: 85px; /* Ajuste leve para pantallas móviles */
+    background: linear-gradient(135deg, #1a080c 0%, #0f0406 100%);
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    border: 2px solid var(--border-red);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(254, 44, 85, 0.2);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                border-color 0.3s, 
+                box-shadow 0.3s;
+    touch-action: manipulation;
+}
 
-        /* Efecto Hover Mecánico 3D */
-        .gift-item:hover {
-            border-color: var(--tiktok-cyan);
-            transform: translateY(-4px) translateZ(10px) rotateX(5deg);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), 0 0 12px rgba(37, 244, 238, 0.3);
-        }
+/* Efecto Táctil / Hover Mecánico 3D */
+.gift-item:hover, .gift-item:active {
+    border-color: var(--tiktok-cyan);
+    transform: translateY(-4px) translateZ(10px) rotateX(5deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), 0 0 12px rgba(37, 244, 238, 0.3);
+}
 
-        /* Marco Interno para simular profundidad de bisel 3D */
-        .gift-item::before {
-            content: '';
-            position: absolute;
-            top: 2px; left: 2px; right: 2px; bottom: 2px;
-            border: 1px solid rgba(254, 44, 85, 0.2);
-            border-radius: 10px;
-            pointer-events: none;
-            z-index: 1;
-        }
+/* Marco Interno para simular profundidad de bisel 3D */
+.gift-item::before {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px; right: 2px; bottom: 2px;
+    border: 1px solid rgba(254, 44, 85, 0.2);
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 1;
+}
 
-        /* Contenedor estricto de la imagen */
-        .gift-img-container {
-            width: 75%;
-            height: 75%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-            transform: translateZ(20px); /* Saca la imagen del fondo */
-            pointer-events: none;
-            transition: transform 0.3s ease;
-            overflow: hidden;
-        }
+/* Contenedor estricto de la imagen */
+.gift-img-container {
+    width: 70%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    transform: translateZ(20px);
+    pointer-events: none;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
 
-        .gift-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Ajuste perfecto sin salirse del contenedor */
-        }
+.gift-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
-        /* Estado del item cuando está seleccionado en la lista */
-        .gift-item.selected {
-            border-color: var(--gold-premium);
-            background: linear-gradient(135deg, #2c1a04 0%, #140b01 100%);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), inset 0 0 15px rgba(255, 215, 0, 0.2);
-            transform: scale(1.05) translateZ(15px);
-        }
+/* Estado del item cuando está seleccionado en la lista */
+.gift-item.selected {
+    border-color: var(--gold-premium) !important;
+    background: linear-gradient(135deg, #2c1a04 0%, #140b01 100%) !important;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), inset 0 0 15px rgba(255, 215, 0, 0.2) !important;
+    transform: scale(1.05) translateZ(15px) !important;
+}
 
-        /* Etiqueta de Precio integrada en el marco */
-        .gift-price {
-            position: absolute;
-            bottom: 3px;
-            left: 50%;
-            transform: translateX(-50%) translateZ(25px);
-            background: rgba(0, 0, 0, 0.75);
-            color: var(--gold-premium);
-            font-size: 9px;
-            font-weight: 800;
-            padding: 2px 6px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            white-space: nowrap;
-            z-index: 4;
-        }
+/* Etiqueta de Precio integrada en el marco */
+.gift-price {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%) translateZ(25px);
+    background: rgba(0, 0, 0, 0.85); /* Un poco más oscuro para mejor lectura en pantallas OLED */
+    color: var(--gold-premium);
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    white-space: nowrap;
+    z-index: 4;
+}
 
-        /* Atenuación del catálogo si hay selección activa */
-        .gift-grid.has-selection .gift-item:not(.selected) {
-            opacity: 0.4;
-            filter: grayscale(0.5);
-        }
+/* Atenuación del catálogo si hay selección activa */
+.gift-grid.has-selection .gift-item:not(.selected) {
+    opacity: 0.35;
+    filter: grayscale(0.6);
+}
 
-        /* Métodos de Pago */
-        .card-option {
-            background: #111113;
-            padding: 16px;
-            margin-bottom: 12px;
-            border-radius: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #222226;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .card-option:hover {
-            background: #16161a;
-            border-color: #3a3a44;
-        }
-        .card-option.active {
-            border-color: #fff;
-            background: #1c1c22;
-            box-shadow: 0 0 15px rgba(255,255,255,0.05);
-        }
-        .card-option span {
-            font-weight: 600;
-            font-size: 15px;
-        }
+/* Métodos de Pago */
+.card-option {
+    background: #111113;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #222226;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+.card-option:hover {
+    background: #16161a;
+    border-color: #3a3a44;
+}
+.card-option.active {
+    border-color: #fff;
+    background: #1c1c22;
+    box-shadow: 0 0 15px rgba(255,255,255,0.05);
+}
+.card-option span {
+    font-weight: 600;
+    font-size: 15px;
+}
 
-        /* ==========================================
-           4. MODAL DE ANIMACIÓN PRO (PANTALLA FLOTANTE)
-           ========================================== */
-        #preview-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(3, 3, 4, 0.92);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
+/* ==========================================
+   4. MODAL DE ANIMACIÓN PRO (PANTALLA FLOTANTE)
+   ========================================== */
+#preview-modal {
+    position: fixed;
+    top: 0; left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    /* Soporte para la barra de navegación dinámica de Safari móvil */
+    height: -webkit-fill-available; 
+    background: rgba(3, 3, 4, 0.94);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
 
-        #preview-modal.active {
-            display: flex;
-            opacity: 1;
-        }
+#preview-modal.active {
+    display: flex;
+    opacity: 1;
+}
 
-        /* Marco 3D de Exhibición Gigante en Pantalla */
-        .showcase-container {
-            position: relative;
-            width: 320px;
-            height: 380px;
-            background: radial-gradient(circle at center, #1f0b10 0%, #0a0204 100%);
-            border-radius: 28px;
-            border: 3px solid #fe2c55;
-            box-shadow: 0 25px 60px rgba(254, 44, 85, 0.4), 
-                        0 0 50px rgba(254, 44, 85, 0.2), 
-                        inset 0 0 40px rgba(0, 0, 0, 0.9);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            transform: scale(0.6) rotateY(30deg);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
+/* Marco 3D de Exhibición Gigante en Pantalla */
+.showcase-container {
+    position: relative;
+    width: 290px;  /* Ajustado para que quepa perfectamente de ancho en el iPhone 14 Pro */
+    height: 360px; /* Ajustado para evitar desbordamiento vertical */
+    background: radial-gradient(circle at center, #1f0b10 0%, #0a0204 100%);
+    border-radius: 24px;
+    border: 3px solid #fe2c55;
+    box-shadow: 0 25px 60px rgba(254, 44, 85, 0.35), 
+                0 0 50px rgba(254, 44, 85, 0.15), 
+                inset 0 0 40px rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    transform: scale(0.8) rotateY(20deg);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+#preview-modal.active .showcase-container {
+    transform: scale(1) rotateY(0deg);
+}
 
         #preview-modal.active .showcase-container {
             transform: scale(1) rotateY(0deg);
@@ -484,7 +499,7 @@
             padding: 10px 24px;
             border-radius: 12px;
             background: #050507;
-            color: #000;
+            color: #fff;
             font-weight: 700;
             font-size: 14px;
             border: none;
