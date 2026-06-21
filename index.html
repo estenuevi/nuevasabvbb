@@ -625,11 +625,43 @@
     </div>
 </div>
 
-<div id="super-alerta">
-    <img src="https://images.icon-icons.com/964/PNG/96/gift_2_icon-icons.com_74640.png" class="icon-regalo" alt="Gift Explode">
-    <h3 style="font-size: 26px; font-weight: 800; margin-top: 20px; background: linear-gradient(45deg, #ffd700, #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">¡COMPLETADO!☑️</h3>
-    <p style="color: #a1a1aa; text-align: center; margin-top: 10px; max-width: 280px; font-size: 15px; line-height: 1.5;">el paquete de regalos se ha realizado con éxito en la cuenta.</p>
-    <button class="btn-pro" onclick="reiniciarApp()" style="width: 220px; margin-top: 30px; background: #fff; color: #000; box-shadow: 0 4px 15px rgba(255,255,255,0.15);">𝘼𝙘𝙚𝙥𝙩𝙖𝙧</button>
+<div id="super-alerta" style="background: rgba(18, 18, 24, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 35px 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 320px; margin: 20px auto; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); animation: popupEntrada 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;">
+    
+    <img src="https://images.icon-icons.com/964/PNG/96/gift_2_icon-icons.com_74640.png" class="icon-regalo" alt="Gift Explode" style="width: 96px; height: 96px; animation: flotarRegalo 2.5s ease-in-out infinite;">
+    
+    <h3 style="font-size: 28px; font-weight: 900; margin-top: 20px; margin-bottom: 5px; background: linear-gradient(45deg, #ff416c, #ff4b2b, #ffd700); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradienteFuego 3s linear infinite, pulsoFuego 1.2s ease-in-out infinite alternate;">¡COMPLETADO!🔥</h3>
+    
+    <p style="color: #a1a1aa; text-align: center; margin-top: 10px; max-width: 280px; font-size: 15px; line-height: 1.5; font-family: sans-serif;">el paquete de regalos se ha realizado con éxito en la cuenta.</p>
+    
+    <button class="btn-pro" onclick="reiniciarApp()" style="width: 220px; margin-top: 30px; background: #ffffff; color: #000000; font-weight: 800; font-size: 16px; padding: 12px; border: none; border-radius: 12px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,255,255,0.2); transition: all 0.2s ease; animation: pulsoBoton 2s infinite;">𝘼𝙘𝙚𝙥𝙩𝙖𝙧</button>
+
+    <style>
+        @keyframes popupEntrada {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes flotarRegalo {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(4deg); }
+        }
+        @keyframes gradienteFuego {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes pulsoFuego {
+            0% { filter: drop-shadow(0 0 2px rgba(255,75,43,0.4)); }
+            100% { filter: drop-shadow(0 0 10px rgba(255,215,0,0.7)); }
+        }
+        @keyframes pulsoBoton {
+            0%, 100% { box-shadow: 0 4px 15px rgba(255,255,255,0.2); }
+            50% { box-shadow: 0 4px 25px rgba(255,255,255,0.5); transform: scale(1.02); }
+        }
+        .btn-pro:hover {
+            background: #f4f4f5 !important;
+            transform: scale(1.05) !important;
+        }
+    </style>
 </div>
 
 <script>
